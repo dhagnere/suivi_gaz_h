@@ -1,12 +1,12 @@
 {
-  "name": "ejs-challenge",
+  "name": "suivi_gaz_h",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "dhagnere",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
