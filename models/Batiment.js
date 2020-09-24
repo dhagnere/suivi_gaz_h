@@ -1,11 +1,11 @@
 const validator = require('validator');
 
-let User = function (data) {
+let Batiment = function (data) {
   this.data = data
   this.errors = []
 }
 
-User.prototype.validate = function () {
+Batiment.prototype.validate = function () {
   if (this.data.username == "") { this.errors.push("Vous devez fournir un nom d'utilisateur.") }
   if (this.data.username !="" && !validator.isAlphanumeric(this.data.username)){this.errors.push("Le nom d'utilisateur doit être composé uniquement de caractères alphanumériques.")}
   if (!validator.isEmail(this.data.email)) { this.errors.push("Vous devez fournir une adresse email valide.") }
@@ -19,11 +19,13 @@ User.prototype.validate = function () {
   }
 
 
-User.prototype.register = function () {
+Batiment.prototype.create = function () {
   //step 1 : validate user date
-  this.validate()
+
   //setp 2 : only if there is no validation errors
   //then save the user data into database
 }
 
-module.exports = User;
+module.exports = Batiment;
+
+
