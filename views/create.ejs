@@ -1,9 +1,22 @@
 <%- include('./partials/header'); -%>
+<%- include('./partials/navbar'); -%>
 <h1>CREATION D'UN BÂTIMENT</h1>
-<form  action = "/create" method = "post" name = "">
+<form  action = "/create_batiment" method = "post" name = "">
     <div class="form-group">
       <label>Nom du bâtiment</label>
       <input class="form-control" type = "text" name = "batiment"></input>
+    </div>
+    <div class="form-group">
+      <label>Adresse</label>
+      <input class="form-control" type = "text" name = "adresse"></input>
+    </div>
+    <div class="form-group">
+      <label>Code Postal</label>
+      <input class="form-control" type = "text" name = "zip"></input>
+    </div>
+    <div class="form-group">
+      <label>Ville</label>
+      <input class="form-control" type = "text" name = "town"></input>
     </div>
     <div class="form-group">
       <label>Numéro du PCE</label>
