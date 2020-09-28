@@ -11,8 +11,8 @@ exports.create = function(req, res){
 }
 
 exports.listAllBuildings = function(req, res){
-  res.render('listbatiments', {
-    listBatiments : listBatiments
+  res.redirect('listbatiments', {
+   
   })
 }
 

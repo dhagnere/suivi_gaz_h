@@ -9,6 +9,7 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 let batiments = []; 
 
+
 //HOME PAGE - GET - USERCONTROLLER@HOME
 router.get('/', userController.home);
 
@@ -59,7 +60,7 @@ router.post('/create_batiment', (req, res, next) => {
     checkboxAttestation: req.body.checkboxAttestation
   };
   batiments.push(batiment);
-  res.redirect('/listbatiments');
+
 });
 
 
