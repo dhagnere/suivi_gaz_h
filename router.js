@@ -15,6 +15,7 @@ router.get('/', userController.home);
 
 //REGISTER A USER - POST - USERCONTROLLER@REGISTER
 router.post('/register', userController.register);
+router.post('/login', userController.login)
 
 //LIST OF ALL BUILDINGS - GET - BATIMENTSCONTROLLER@ALLBUILDINGS
 router.get('/listbatiments', batimentController.listAllBuildings);

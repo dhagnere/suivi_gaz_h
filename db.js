@@ -1,9 +1,15 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const mongodb = require('mongodb')
-const connectionString ='mongodb+srv://jobwow:tobias33126470@cluster0.an1yh.mongodb.net/energyDB?retryWrites=true&w=majority'
+const mongoose = require('mongoose')
 
- mongodb.connect(connectionString, { useNewUrlParser: true , useUnifiedTopology: true } , function(err , client){
+//mongoose local connect
+mongoose.connect(process.env.MONGOSHELL)
+const client = mongoose.connection
 
-  module.exports = client.db()
+ //mongodb.connect(process.env.CONNECTIONSTRING, { useNewUrlParser: true , useUnifiedTopology: true } , function(err , client){
+
+  module.exports = client
   const app = require('./app')
-  app.listen(3000)
-})
+  app.listen(process.env.PORT)
+

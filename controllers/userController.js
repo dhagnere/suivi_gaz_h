@@ -6,9 +6,13 @@ const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui 
 
 let batiments = [];
 
-exports.login = function () {
-
-
+exports.login = function (req , res) {
+  let user = new User(req.body)
+  user.login().then(function (result) {//if promise is resolved in User model
+    res.send(result)
+  }).catch(function (e) {
+    res.send(e)
+  })//if promise is rejected in User Model
 
 }
 
