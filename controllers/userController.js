@@ -17,8 +17,6 @@ exports.login = function (req , res) {
 }
 
 exports.logout = function(){
-
-
   
 }
 

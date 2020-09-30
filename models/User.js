@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const usersCollection = require('../db').collection('users');
 const validator = require('validator');
 
@@ -42,11 +43,9 @@ User.prototype.validate = function () {
 //user login
 User.prototype.login = function () {
   return new Promise((resolve, reject) => {
-    //step 1 validate user data
-    this.cleanUpLoginForm()
-    // step 2 check bd if user exist
-    usersCollection.findOne({ username: this.data.username }).then((attemptedUser) => {
-      if (attemptedUser && attemptedUser.password == this.data.password) {
+    this.cleanUpLoginForm()//step 1 validate user data
+    usersCollection.findOne({ username: this.data.username }).then((attemptedUser) => {   // step 2 check bd if user exist
+      if (attemptedUser && bcrypt.compareSync(this.data.password, attemptedUser.password)) {
         resolve('ok')
       } else {
         reject('invalid username or password')
@@ -56,6 +55,7 @@ User.prototype.login = function () {
         reject("Veuillez essayer plus tard...")
       })
   })
+}
 
 
   User.prototype.register = function () {
@@ -65,13 +65,12 @@ User.prototype.login = function () {
     //setp 2 : only if there is no validation errors
     //then save the user data into database
     if (!this.errors.length) {
+    //hash user password
+      let salt = bcrypt.genSaltSync(10)
+      this.data.password=bcrypt.hashSync(this.data.password, salt)
       usersCollection.insertOne(this.data)
     }
   }
-}
 
-  //step 3 if user exist compare password
-
-  //step 4 if pw match redirect to dashboard
 
 module.exports = User
