@@ -34,15 +34,21 @@
 <!-- header ends here -->
 
 <div class="container py-md-5">
+  <% errors.forEach(function(message){ %>
+    <div class="alert alert-danger text-center"><%= message %></div>
+  <% }) %>
 
   <div class="row align-items-center">
     <div class="col-lg-7 py-3 py-md-5">
-      <h1 class="display-5 text-align-center">Vous gérez l'energie de votre commune?</h1>      
-      <p class="lead text-muted">Cette application est déstinée à vous aider è suivre les consommations, les coûts, le suivi des travaux d'améliorations ou réglementaires(Gaz H, ...), mais aussi les CEE et les financements obtenus. ELLE EST EN PHASE DE CONCEPTION</p>
+      <h1 class="display-2 text-center">Vous gérez l'energie de votre commune?</h1>      
+      <p class="lead text-muted text-center">Cette application est déstinée à vous aider è suivre les consommations, les coûts, le suivi des travaux d'améliorations ou réglementaires(Gaz H, ...), mais aussi les CEE et les financements obtenus. ELLE EST EN PHASE DE CONCEPTION</p>
     </div>
-    <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-
+    <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">     
       <form action="/register" method="POST" id="registration-form">
+        <% regErrors.forEach(function(message){ %>
+        <div class="alert alert-danger small"><%= message %></div>
+        <% }) %>
+
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1"><small>Nom d'utilisateur</small></label>
             <input name="username" id="username-register" class="form-control" type="text" placeholder="Choisissez un nom d'utilisateur" autocomplete="off">

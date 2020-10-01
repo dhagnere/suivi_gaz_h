@@ -3,6 +3,7 @@
 const express = require("express");
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+const flash = require('connect-flash')
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
@@ -22,6 +23,7 @@ let sessionOptions = session({
 })
 
 app.use(sessionOptions)
+app.use(flash())
 
 //Setting views and view engine
 app.set('view engine', 'ejs');

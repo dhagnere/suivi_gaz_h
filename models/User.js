@@ -29,7 +29,7 @@ User.prototype.cleanUpLoginForm = function() {
   }
 }
 //validating form datas
-User.prototype.validate = function () {
+User.prototype.validate = async function () {
   if (this.data.username == "") { this.errors.push("Vous devez fournir un nom d'utilisateur.") }
   if (this.data.username !="" && !validator.isAlphanumeric(this.data.username)){this.errors.push("Le nom d'utilisateur doit être composé uniquement de caractères alphanumériques.")}
   if (!validator.isEmail(this.data.email)) { this.errors.push("Vous devez fournir une adresse email valide.") }
@@ -38,7 +38,15 @@ User.prototype.validate = function () {
   if (this.data.password.length > 50) { this.errors.push("Le mot de passe ne peux pas dépasser 50 caractères") }
   if (this.data.username.length > 0 && this.data.username.length < 3) { this.errors.push("Le nom être composé de 3  caractères minimum") }
   if (this.data.username.length > 30) { this.errors.push("Le nom d'utilisateur ne peux pas dépasser 30 caractères") }
+//ony if username is valid then check if allready in use  
+  if (this.data.username.length > 2 && this.data.username.length < 31 && validator.isAlphanumeric(this.data.username))
+  {
+    let usernameExists = await usersCollection.findOne({ username : this.data.username})
+    if (usernameExists) {this.errors.push('Le nom d\'utilisateur existe déja')}
   }
+}
+
+
 //user login
 User.prototype.login = function () {
   return new Promise((resolve, reject) => {
@@ -47,7 +55,7 @@ User.prototype.login = function () {
       if (attemptedUser && bcrypt.compareSync(this.data.password, attemptedUser.password)) {
         resolve('ok')
       } else {
-        reject('invalid username or password')
+        reject('Le mot de passe ou l\'utilisateur sont incorrects')
       }
     })
       .catch(function () {
@@ -59,16 +67,23 @@ User.prototype.login = function () {
 
   User.prototype.register = function () {
     //step 1 : validate user date
-    this.cleanUpRegisterForm()//cleaning up datas sent from form (allowing just strings)
-    this.validate()
-    //setp 2 : only if there is no validation errors
-    //then save the user data into database
-    if (!this.errors.length) {
-    //hash user password
-      let salt = bcrypt.genSaltSync(10)
-      this.data.password=bcrypt.hashSync(this.data.password, salt)
-      usersCollection.insertOne(this.data)
-    }
+    return new Promise(async (resolve, reject) => {
+      // Step #1: Validate user data
+      this.cleanUpRegisterForm()
+      await this.validate()
+    
+      // Step #2: Only if there are no validation errors 
+      // then save the user data into a database
+      if (!this.errors.length) {
+        // hash user password
+        let salt = bcrypt.genSaltSync(10)
+        this.data.password = bcrypt.hashSync(this.data.password, salt)
+        await usersCollection.insertOne(this.data)
+        resolve()
+      } else {
+        reject(this.errors)
+      }
+    })
   }
 
 
