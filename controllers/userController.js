@@ -8,16 +8,22 @@ let batiments = [];
 
 exports.login = function (req , res) {
   let user = new User(req.body)
-  user.login().then(function (result) {//if promise is resolved in User model
-    res.send(result)
+  user.login().then(function (result) {
+    //if promise is resolved in User model
+    req.session.user = {username: user.data.username}
+    req.session.save(function (){
+      res.redirect('/')
+    })
   }).catch(function (e) {
     res.send(e)
   })//if promise is rejected in User Model
 
 }
 
-exports.logout = function(){
-  
+exports.logout = function (req , res) {
+  req.session.destroy(function () {
+    res.redirect('/')
+  }) 
 }
 
 exports.register = function(req, res){
@@ -30,9 +36,14 @@ exports.register = function(req, res){
   }
 }
 
-exports.home = function(req ,res) {
-  res.render('home-guest', {
-    homeStartingContent: homeStartingContent,
-    batiments: batiments
-  });
+exports.home = function (req, res) {
+  if (req.session.user) {
+    res.render('home-dashboard', {
+      username: req.session.user.username
+    })
+  } else {
+    res.render('home-guest', {
+      batiments: batiments
+    });
+  }
 }

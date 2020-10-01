@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const usersCollection = require('../db').collection('users');
+const usersCollection = require('../db').db().collection('users');
 const validator = require('validator');
 
 let User = function (data) {
@@ -11,7 +11,6 @@ User.prototype.cleanUpRegisterForm = function() {
   if (typeof(this.data.username) != "string") { this.username.data = "" }
   if (typeof(this.data.email) != "string") { this.email.data = "" }
   if (typeof(this.data.password) != "string") { this.password.data = "" }
-  
   //get ride of any bogus properties
   this.data = {
     username: this.data.username.trim().toLowerCase(),
@@ -36,7 +35,7 @@ User.prototype.validate = function () {
   if (!validator.isEmail(this.data.email)) { this.errors.push("Vous devez fournir une adresse email valide.") }
   if (this.data.password == "") { this.errors.push("Vous ne pouvez laisser un mot de passe vide.") }
   if (this.data.password.length > 0 && this.data.password.length < 12) { this.errors.push("Le mot de passe doit être composé de 12 caractères minimum") }
-  if (this.data.password.length > 100) { this.errors.push("Le mot de passe ne peux pas dépasser 100 caractères") }
+  if (this.data.password.length > 50) { this.errors.push("Le mot de passe ne peux pas dépasser 50 caractères") }
   if (this.data.username.length > 0 && this.data.username.length < 3) { this.errors.push("Le nom être composé de 3  caractères minimum") }
   if (this.data.username.length > 30) { this.errors.push("Le nom d'utilisateur ne peux pas dépasser 30 caractères") }
   }

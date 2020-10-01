@@ -1,5 +1,8 @@
 //jshint esversion:6
+
 const express = require("express");
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
@@ -7,6 +10,18 @@ const ejs = require("ejs");
 const router = require("./router");
 
 const app = express();
+
+let sessionOptions = session({
+  secret: "my name is jobwow",
+  store: new MongoStore({client: require('./db')}),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge : 1000*60*60*24, httpOnly:true
+  }
+})
+
+app.use(sessionOptions)
 
 //Setting views and view engine
 app.set('view engine', 'ejs');

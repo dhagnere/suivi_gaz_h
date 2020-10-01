@@ -14,8 +14,11 @@ let batiments = [];
 router.get('/', userController.home);
 
 //REGISTER A USER - POST - USERCONTROLLER@REGISTER
-router.post('/register', userController.register);
+router.post('/register', userController.register)
+//LOGIN USER
 router.post('/login', userController.login)
+//LOGOUT USER
+router.post('/logout', userController.logout)
 
 //LIST OF ALL BUILDINGS - GET - BATIMENTSCONTROLLER@ALLBUILDINGS
 router.get('/listbatiments', batimentController.listAllBuildings);
