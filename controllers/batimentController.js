@@ -6,7 +6,7 @@ exports.create = function(req, res){
   if (batiment.errors.length) {
     res.send(batiment.errors)
   } else {
-    res.render('create')
+    res.render('create' , {username: req.session.user.username , avatar: req.session.user.avatar})
   }
 }
 
