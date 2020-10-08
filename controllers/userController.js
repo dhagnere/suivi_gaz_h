@@ -1,6 +1,6 @@
 const User = require('../models/User')
 
-exports.mustBeloggedIn = function (req , res , next) {
+exports.mustBeLoggedIn = function (req , res , next) {
   if (req.session.user) {
     next()
   } else {

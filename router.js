@@ -4,7 +4,7 @@ const userController = require("./controllers/userController");
 const buildingController = require("./controllers/buildingController");
 
 
-let batiments = []; 
+let buildings = []; 
 
 //USER REALTED ROUTES
 router.get('/', userController.home);
@@ -13,32 +13,23 @@ router.post('/login', userController.login)
 router.post('/logout', userController.logout)
 
 //BUILDINGS RELATED ROUTES
-router.get('/create-building', userController.mustBeloggedIn, buildingController.viewCreateScreen);
-router.get('/listbatiments', buildingController.listAllBuildings);
+
+//get view for cree building form
+router.get('/create-building', userController.mustBeLoggedIn, buildingController.viewCreateScreen);
+//get view for listing all buildings
+router.get('/listBuildings', buildingController.listAllBuildings);
+//get view for one batiment
+router.get('/view-building/:id' , buildingController.viewSingleBuilding)
 
 
 
 //CREATE BUILDING - POST
-router.post('/create-building', userController.mustBeloggedIn, buildingController.createBuilding (req, res, next) => {
-  const batiment = {
-    batiment: req.body.batiment,
-    adresse: req.body.adresse,
-    zip: req.body.zip,
-    ville: req.body.town,
-    pce: req.body.pce,
-    description: req.body.description,
-    checkboxInventaire: req.body.checkboxInventaire,
-    checkboxDetendeurs: req.body.checkboxDetendeurs,
-    checkboxDevis: req.body.checkboxDevis,
-    checkboxDevisValides: req.body.checkboxDevisValides,
-    checkboxEngagement: req.body.checkboxEngagement,
-    checkboxReglages: req.body.checkboxReglages,
-    checkboxAttestation: req.body.checkboxAttestation
-  };
-  batiments.push(batiment);
-
-});
+router.post('/create-building', userController.mustBeLoggedIn, buildingController.createBuilding);
 
 
 
+//CATEGORY RELATED ROUTES
+//create categories
+//show categoeries
+  
 module.exports = router;

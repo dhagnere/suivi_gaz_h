@@ -1,0 +1,81 @@
+const batiment = {
+  batiment: req.body.batiment,
+  adresse: req.body.adresse,
+  zip: req.body.zip,
+  ville: req.body.town,
+  pce: req.body.pce,
+  description: req.body.description,
+  checkboxInventaire: req.body.checkboxInventaire,
+  checkboxDetendeurs: req.body.checkboxDetendeurs,
+  checkboxDevis: req.body.checkboxDevis,
+  checkboxDevisValides: req.body.checkboxDevisValides,
+  checkboxEngagement: req.body.checkboxEngagement,
+  checkboxReglages: req.body.checkboxReglages,
+  checkboxAttestation: req.body.checkboxAttestation
+};
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox"  name = "checkboxInventaire" id="checkboxInventaire" value="checked">
+  <label class="form-check-label" for="checkboxInventaire">Inventaire terminé</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="checkboxDetendeurs" id="checkboxDetendeurs" value="checked">
+  <label class="form-check-label" for="checkboxDetendeurs">Réglages détendeurs éffectués</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name = "checkboxDevis" id="checkboxDevis" value="checked">
+  <label class="form-check-label" for="checkboxDevis">Devis réglages appareils gaz</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name = "checkboxDevisValides" id="checkboxDevisValides" value="checked">
+  <label class="form-check-label" for="checkboxDevisValides">Devis réglages appareils gaz validés GRDF</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="checkboxEngagement" id="checkboxEngagement" value="checked">
+  <label class="form-check-label" for=""checkboxEngagement">Engagement financier prestataire terminé</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox"  name="checkboxReglages" id="checkboxReglages" value="checked">
+  <label class="form-check-label" for="checkboxReglages">Travaux réglages pression terminés</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name = "checkboxAttestation" id="checkboxAttestation" value="checked">
+  <label class="form-check-label" for="checkboxAttestation">Attestation de conformité signée</label>
+</div>
+
+
+//view lisy tableau
+
+<%- include('./partials/header'); -%>
+<%- include('./partials/navbar'); -%>
+<h1>LISTE DES BÂTIMENTS</h1>
+
+
+  <table class="table">
+    <thead">
+      <th scope="col">Bâtiments</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">CP</th>
+      <th scope="col">VILLE</th>
+      <th scope="col">PCE</th>
+      <th  class="pull-right" scope="col">ACTION</th>
+      
+    </thead>
+    <% batiments.forEach(function(batiment){%>
+      <tbody>
+        <tr>
+          <td><%=batiment.batiment %></td>
+          <td><%=batiment.adresse %></td>
+          <td><%=batiment.zip %></td>
+          <td><%=batiment.ville %></td>
+          <td><%=batiment.pce %></td>
+          <td><button class="btn btn-primary pull-right">Accéder à la fiche</button></td>
+        </tr>
+    <%});%> 
+      </tbody>
+  </table>
+</br>
+<%- include('./partials/footer'); -%>
+
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2509.8532395895245!2d2.380838905085184!3d51.01886008938614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dc8cfb0f52bc0f%3A0x6eda101401fe0cf2!2sH%C3%B4tel%20de%20Ville%20de%20Coudekerque-Branche!5e0!3m2!1sfr!2sfr!4v1602162989160!5m2!1sfr!2sfr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
