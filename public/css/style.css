@@ -97,7 +97,7 @@ padding: 0;
 
 }
 .sidebar-nav li:hover{
-background: skyblue !important;
+background: rgb(192, 174, 71) !important;
 border-radius: 10px;
 margin-left: 10px;
 margin-right: 10px;
@@ -170,7 +170,7 @@ margin-right: 10px;
 .dropdown-menu.show {
 	top: 0;
 }
-/*Fontawesome icons*/
+/*----Fontawesome icons-------
 .nav.sidebar-nav li a::before {
 	font-family: fontawesome;
 	content: "text";
@@ -179,13 +179,14 @@ margin-right: 10px;
 	padding-right: 5px;
 }
 a[href*="/"]::before {
-content: "\f2c0" !important;
+content: "\f007" !important;
 }
-a[href*="#about"]::before {
-content: "\f129" !important;
+a[href*="#Gestion des bâtiments"]::before {
+content: "fas fa-user" !important;
+color: #e6e210;
 }
 a[href*="#events"]::before {
-content: "\f073" !important;
+content: "\f007" !important;
 }
 a[href*="#events"]::before {
 content: "\f073" !important;
@@ -218,9 +219,9 @@ a[href*="#contact"]::before {
 content: "\f086" !important;
 }
 a[href*="#followme"]::before {
-content: "\f099" !important;
-color: #0084b4;
-}
+content: "\f007" !important;
+color: #e6e210;
+}*/
 /*-------------------------------*/
 /*       Hamburger-Cross         */
 /*-------------------------------*/

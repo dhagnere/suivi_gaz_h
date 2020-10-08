@@ -1,5 +1,7 @@
 <%- include('./partials/header'); -%>
+<%- include('./partials/navtop'); -%>
 <%- include('./partials/navbar'); -%>
+
          <!-- /#sidebar-wrapper -->
  
          <!-- Page Content -->
@@ -12,10 +14,7 @@
              <div class="container">
                  <div class="row">
                      <div class="col-lg-10 text-center">
-                         <h1>Bienvenue sur votre Dashboard <%= username %></h1>
-                         <form action="/logout" method="POST" class="d-inline">
-                            <button class="btn btn-sm btn-secondary">Déconnection</button>
-                          </form>                       
+                         <h1>Bienvenue sur votre Dashboard <%= user.username.toUpperCase() %></h1>
                      </div>
                  </div>
              </div>

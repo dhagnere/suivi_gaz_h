@@ -27,6 +27,12 @@ let sessionOptions = session({
 app.use(sessionOptions)
 app.use(flash())
 
+//put our session in locals to be able to use in ejs
+app.use(function (req, res, next) {
+  res.locals.user = req.session.user
+  next()
+})
+
 
 
 //setting up bodyparser
@@ -41,9 +47,9 @@ app.set('view engine', 'ejs');
 //use the router
 app.use('/', router);
 
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+//app.use(function(req, res, next) {
+//  next(createError(404));
+//});
 
 // error handler
 app.use(function(err, req, res, next) {

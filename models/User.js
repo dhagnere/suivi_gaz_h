@@ -46,7 +46,6 @@ User.prototype.validate = function () {
       let usernameExists = await usersCollection.findOne({ username : this.data.username})
       if (usernameExists) {this.errors.push('Le nom d\'utilisateur existe déja')}
     }
-  
     if (validator.isEmail(this.data.email))
     {
       let emailExists = await usersCollection.findOne({ email : this.data.email})
