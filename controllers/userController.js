@@ -1,36 +1,62 @@
 const User = require('../models/User')
 
-const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
-
-
-
-let batiments = [];
-
-exports.login = function () {
-
-
-
-}
-
-exports.logout = function(){
-
-
-  
-}
-
-exports.register = function(req, res){
-  let user = new User(req.body)
-  user.register()
-  if (user.errors.length) {
-    res.send(user.errors)
+exports.mustBeLoggedIn = function (req , res , next) {
+  if (req.session.user) {
+    next()
   } else {
-    res.send("bravo pas d'erreur")
+    req.flash('errors', "Vous devez être connecté pour utiliser cette fonctionnalité")
+    req.session.save(function () {
+      res.redirect('/')
+    })
   }
 }
 
-exports.home = function(req ,res) {
-  res.render('home-guest', {
-    homeStartingContent: homeStartingContent,
-    batiments: batiments
-  });
+exports.login = function (req , res) {
+  let user = new User(req.body)
+  user.login()
+    .then(function (result) {
+    //if promise is resolved in User model
+    req.session.user = {avatar: user.avatar , username: user.data.username}
+    req.session.save(function (){
+      res.redirect('/')
+    })
+  }).catch(function (e) {
+    req.flash('errors', e)
+    req.session.save(function () {
+      res.redirect('/')
+    })
+    res.redirect('/')
+  })//if promise is rejected in User Model
 }
+
+exports.logout = function (req , res) {
+  req.session.destroy(function () {
+    res.redirect('/')
+  }) 
+}
+
+exports.register = function(req, res) {
+  let user = new User(req.body)
+  user.register().then(() => {
+    req.session.user = {avatar : user.avatar , username: user.data.username}
+    req.session.save(function() {
+      res.redirect('/')
+    })
+  }).catch((regErrors) => {
+    regErrors.forEach(function(error) {
+      req.flash('regErrors', error)
+    })
+    req.session.save(function() {
+      res.redirect('/')
+    })
+  })
+}
+
+exports.home = function(req, res) {
+  if (req.session.user) {
+    res.render('home-dashboard')
+  } else {
+    res.render('home-guest', {errors: req.flash('errors'), regErrors: req.flash('regErrors')})
+  }
+}
+

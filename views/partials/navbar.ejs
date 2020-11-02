@@ -1,20 +1,41 @@
-<meta charset="utf-8">
-  <title>SUIVI BASCULE GAZ H</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/styles.css">
-  <nav class="navbar navbar-default">
-
-    <div class="container">
-      <div class="navbar-header">
-        <p>SUIVI BASCULE GAZ H</p>
+<div id="wrapper">
+  <div class="overlay"></div>
+   
+       <!-- Sidebar -->
+   <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+    <ul class="nav sidebar-nav">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <a href="#">CoudEnergie</a>
+        </div>
       </div>
-        <ul>
-          <!-- 6 -->
-          <li id="home"><a href="/">ACCUEIL</a></li>
-          <li id="listbatiments"><a href="/listbatiments">LISTE BATIMENTS</a></li>
-          <li id="createbatiment"><a href="/create">CREER UN BATIMENT</a></li>
-          <li id="contact"><a href="/contact">CONTACT</a></li>
-        </ul>
-    </div>
-  </nav>
+      <li>  <a href="/">Accueil</a></li>  
+      <li class="dropdown">
+        <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Gestion des bâtiments<span class="caret"></span></a>
+          <ul class="dropdown-menu animated fadeInLeft" role="menu">
+            <div class="dropdown-header "fas fa-user">Gestion des bâtiments</div>
+              <li><a href="/create-building">Créer un bâtiment</a></li>
+              <li><a href="/view-building/:id">Voir un bâtiment</a></li>
+              <li><a href="/listbuildings">Liste des bâtiments</a></li>
+          </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Gestion de l'energie<span class="caret"></span></a>
+          <ul class="dropdown-menu animated fadeInLeft" role="menu">
+            <div class="dropdown-header">Consommations par entité</div>
+              <li><a href="/create">Consommations électriques</a></li>
+              <li><a href="/create">Voir un bâtiment</a></li>
+              <li><a href="/list">Liste des bâtiments</a></li>
+          </ul>
+      </li>
+
+
+      <li><a href="/create">Créer un bâtiment</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#team">Team</a></li>
+    
+     <li><a href="#services">Services</a></li>
+     <li><a href="#contact">Contact</a></li>
+     <li><a href="#followme">Follow me</a></li>
+     </ul>
+ </nav>
